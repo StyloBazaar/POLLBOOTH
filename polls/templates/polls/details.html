@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QUESTION{{ question.id }}</title>
+</head>
+<body>
+
+    {% if error_message %}
+    <h1> {{ error_message }}</h1>
+    {% endif %}
+    <h2> {{ question.question_text }} </h2>
+    <form action=" {% url 'polls:vote' question.id %}" method="post">
+<!--         forms with post method should contain the template tag {% csrf_token %} for protection against cross site forgeries-->
+        {% csrf_token %}
+        {% for choice in question.choice_set.all %}
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+        {% endfor %}
+        <input type="submit" value="vote">
+    </form>
+
+
+</body>
+</html>

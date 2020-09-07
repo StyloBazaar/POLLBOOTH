@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>POLLS BOOTH</title>
+</head>
+<body>
+    <h1>WELCOME TO POLLING BOOTH</h1>
+    {% if question_set %}
+    <ul>
+        {% for question in question_set %}
+        <li>
+            <a href="{% url 'polls:details' question.id %}" target="_blank"> {{ question.question_text }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        No Polls are Available.
+    {% endif %}
+</body>
+</html>
